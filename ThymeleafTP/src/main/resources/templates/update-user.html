@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Form Title</title>
+
+    <style>
+        /* Import Poppins font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        /* Apply Poppins font to the entire document */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white; 
+            }
+
+        /* Basic form styling */
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #caf0f8; /* Lighter shade of orange for the form background */
+            margin-top: 15%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        span {
+            color: #ff0000; /* Red color for error messages */
+            display: block;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #00bfff; /* Orange background color for the button */
+            color: #ffffff; /* Text color for the button */
+            cursor: pointer;
+            font-family : 'Poppins';
+            border : none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00bfff; /* Darker shade of orange on hover */
+            
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+	<label for="name">Name</label>
+	<input type="text"th:field="*{name}"id="name"placeholder="Name">
+	<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+	<label for="email">Email</label>
+	<input type="email"th:field="*{email}"	id="email"placeholder="Email">
+	<spanth:if="${#fields.hasErrors('email')}"th:errors="*{email}"></span>
+	<input	type="submit"value="Update User">
+</form>
+
+</body>
+</html>

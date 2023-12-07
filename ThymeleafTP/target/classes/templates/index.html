@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+    <style>
+        /* Import Poppins font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        /* Apply Poppins font to the entire document */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white; /* Teal background color for the entire page */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for the user table */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-left:10%;
+        }
+
+        th, td {
+            border: 1px solid  #00bfff; /* Teal border for table cells */
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #00bfff; /* Teal background for table header */
+            color: #ffffff; /* Text color for table header */
+        }
+
+        tr:nth-child(even) {
+            background-color: #caf0f8; /* Lighter shade of teal for even rows */
+        }
+
+        /* Links for Edit and Delete */
+        a {
+            text-decoration: none;
+            color: #00e9d8; /* Teal color for links */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add user link style */
+        p a {
+            color: #00e9d8; /* Teal color for the "Add a new user" link */
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div th:switch="${users}">
+        <h2 th:case="null">No users yet!</h2>
+        <div th:case="*">
+            <h2>Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td><center><a th:href="@{/edit/{id}(id=${user.id})}"><i class="fas fa-pencil-alt" style="color: green;"></i></a></td></a></center></td>
+                        <td><center><a th:href="@{/delete/{id}(id=${user.id})}"><i class="fas fa-trash-alt" style="color: red;"></i></a></center></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <center><a href="/signup">Add a new user</a></center>
+        </p>
+    </div>
+
+</body>
+</html>
